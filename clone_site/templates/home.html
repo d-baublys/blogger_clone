@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class lang="en">
+    <head>
+        <title>Blogger.com - Create a unique and beautiful blog easily.</title>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        {% load static %}
+        <link rel="stylsheet" type="text/css" href="{% static 'styles.css'}" />
+    </head>
+    <!-- <div style="height: 0; width: 0; position: absolute; visibility: hidden"></div> -->
+    <body>
+        <header class="header header--sticky">
+            <div class="header--content">
+                <div class="header--logo logo">
+                    <a href="/go/home" class="ga-header-logo">
+                        <!-- <svg class="logo-icon">
+
+                        </svg>
+                        <svg class="logo-type">
+
+                        </svg> -->
+                    </a>
+                </div>
+                <div class="header-buttons">
+                    <a href="/go/signin" class="sign-in ga-header-sign-in">
+                        <span>Sign in</span>
+                    </a>
+                    <a href="/go/createyourblog" class="cta ga-header-cta">
+                        <span>Create your blog</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header--underlay"></div>
+        </header>
+        <main id="maincontent" role="main" aria-label="Main content">
+            <section class="section hero" tabindex="0">
+                <header class="hero--header">
+                    <h2>Publish your passions, your way</h2>
+                    <p>Create a unique and beautiful blog easily.</p>
+                    <a href="/go/createyourblog" class="cta ga-hero-cta">Create your blog</a>
+                </header>
+                <div class="hero--background">
+                    <!-- <div class="theme js-theme green"></div>
+                    <div class="theme js-theme blue"></div>
+                    <div class="theme js-theme red"></div> -->
+                </div>
+                <a class="scrolldown js-scroll-to" href="#choose-design">
+                    <!-- <svg class="icon icon-arrow-down"></svg> -->
+                </a>
+            </section>
+            <section class="section choose-design active" id="choose-design" tabindex="0">
+                <header>
+                    <div>
+                        <h2>Choose the perfect design</h2>
+                        <p>
+                            Create a beautiful blog that fits your style. Choose from a selection of easy-to-use
+                            templates - all with flexible layouts and hundreds of background images - or designs
+                            something new.
+                        </p>
+                    </div>
+                </header>
+                <!-- <div class="background"></div> -->
+            </section>
+            <section class="section free-domain active" tabindex="0">
+                <header>
+                    <div>
+                        <h2> Get a domain </h2>
+                        <p>
+                            Give your blog the perfect home. Get a blogspot.com domain or buy a custom domain with
+                            just a few clicks.
+                        </p>
+                    </div>
+                </header>
+                <!-- <div class="background"></div> -->
+            </section>
+            <section class="section earn-money active">
+                <header>
+                    <div>
+                        <h2> Earn money </h2>
+                        <p>
+                            Get paid for your hard work. Google AdSense can automatically display relevant targeted
+                            ads on your blog so that you can earn income by posting about your passion.
+                        </p>
+                    </div>
+                </header>
+                <!-- <div class="background"></div> -->
+            </section>
+            <section class="section know-your-audience active " tabindex="0">
+                <header>
+                    <div>
+                        <h2>Know your audience</h2>
+                        <p>
+                            Find out which posts are a hit with Blogger's built-in analytics. You'll see where your
+                            audience is coming from and what they're interested in. You can even connect your blog
+                            directly to Google Analytics for a more detailed look.
+                        </p>
+                    </div>
+                </header>
+                <!-- <div class="background"></div> -->
+            </section>
+            <section class="section memories active" tabindex="0">
+                <header>
+                    <div>
+                        <h2>Hang on to your memories</h2>
+                        <p>
+                            Save the moments that matter. Blogger lets you safely store thousands of posts, photos,
+                            and more with Google.
+                        </p>
+                    </div>
+                </header>
+                <!-- <div class="background"></div> -->
+            </section>
+            <section class="section millions active" tabindex="0">
+                <header>
+                    <div>
+                        <h2>Join millions of others</h2>
+                        <p>
+                            Whether sharing your expertise, breaking news, or whatever's on your mind, you're in good
+                            company on Blogger. Sign up to discover why millions of people have published their passions
+                            here.
+                        </p>
+                        <a href="/go/createyourblog" class="cta dark ga-map-cta">Create your blog</a>
+                    </div>
+                </header>
+                <!-- <div class="background millions__background"></div> -->
+            </section>
+        </main>
+        <footer class="footer">
+            <section>
+                <ul>
+                    <li>
+                        <h3>Help</h3>
+                    </li>
+                    <li>
+                        <a href="/go/helpcenter" target="_blank" class="ga-footer" data-track="Help Center">Help
+                            Center
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/go/helpforum" target="_blank" class="ga-footer" data-track="Help Forum">Help Forum
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/go/tutorials" target="_blank" class="ga-footer" data-track="Video Tutorials">Video
+                        Tutorials</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <h3>Community</h3>
+                    </li>
+                    <li>
+                        <a href="/go/buzz" target="_blank" class="ga-footer" data-track="Blogger Buzz">Blogger Buzz
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <h3>Developers</h3>
+                    </li>
+                    <li>
+                        <a href="/go/devapi" target="_blank" class="ga-footer" data-track="Blogger API">Blogger API
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/go/devforum" target="_blank" class="ga-footer" data-track="Developer Forum">
+                        Developer Forum</a>
+                    </li>
+                </ul>
+            </section>
+            <hr>
+            <section class="meta">
+                <ul>
+                    <li>
+                        <a href="/go/terms" target="_blank" class="ga-footer" data-track="Terms of Service">Terms of
+                        Service</a>
+                    </li>
+                    <li>
+                        ::before
+                        <a href="/go/privacy" target="_blank" class="ga-footer" data-track="Privacy">Privacy</a>
+                    </li>
+                    <li>
+                        ::before
+                        <a href="/go/contentpolicy" target="_blank" class="ga-footer" data-track="Content Policy">
+                        Content Policy</a>
+                    </li>
+                </ul>
+                <div>
+                    <select name class="js-language-switch ga-language-switch language-switch" id="language-switch">
+                        <option value="?hl=en">English</option>
+                    </select>
+                </div>
+            </section>
+        </footer>
+        <!-- <script src="//ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
+        <script src="js/main.min.js?v=1476060773" class="app-js"></script> -->
+    </body>
+</html>
