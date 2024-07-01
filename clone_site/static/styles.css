@@ -34,3 +34,15 @@ body {
     height: 4rem;
     z-index: 1;
 }
+
+.st0 {
+    fill: url(#gradientone);
+}
+
+.st1 {
+    fill: #FFFFFF;
+}
+
+.st2 {
+    fill: url(#gradienttwo);
+}
