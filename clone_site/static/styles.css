@@ -358,11 +358,11 @@ body main, body header, body footer {
 }
 
 .scrolldown {
-    transform: translateX(50%) translateY(50%);
+    transform: translateY(50%);
     position: absolute;
     z-index: 1;
-    bottom: 4rem;
-    right: 50%;
+    bottom: 3rem;
+    right: 4rem;
     width: 4rem;
     height: 4rem;
     box-shadow: 0 .125rem .1875rem rgba(0, 0, 0, .2);
@@ -622,11 +622,11 @@ body main, body header, body footer {
 }
 
 .millions--map {
-    background-image: url('millions-map_2x.png')
+    background-image: url(millions-map_2x.png)
 }
 
 .millions--markers {
-    background-image: url('millions-markers_2x.png')
+    background-image: url(millions-markers_2x.png)
 }
 
 .millions .millions-header {
@@ -699,6 +699,8 @@ footer ul, footer li {
 }
 
 footer section ul {
+    display: inline-block;
+    margin-bottom: 0;
     width: 20%;
 }
 
@@ -756,13 +758,18 @@ footer ul li a {
     color: #cbd1d3;
 }
 
+footer ul li h3 {
+    font-weight: 500;
+    color: #fff;
+}
+
 footer section.meta>div {
     margin-top: 0;
 }
 
 .language-switch {
     background-color: #303e47;
-    background-image: url(/img/ui/icon-arrow-down.png);
+    background-image: url(icon-arrow-down.png);
     background-size: 12px;
     background-position: 95% 50%;
     background-repeat: no-repeat;
@@ -775,6 +782,11 @@ footer section.meta>div {
     padding: 0 2rem 0 .625rem;
     border-radius: 4px;
     cursor: pointer;
+}
+
+select {
+    font: inherit;
+    -webkit-appearance: none;
 }
 
 a {
