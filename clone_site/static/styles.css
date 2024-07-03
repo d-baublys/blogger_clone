@@ -5,11 +5,12 @@ html {
 
 body {
     background-color: #2f454f;
-    /* color: #2f454f; */
+    color: #2f454f;
     margin: 0;
     font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.66;
+    position: relative;
 }
 
 .header {
@@ -383,6 +384,7 @@ body main, body header, body footer {
     min-height: 37.5rem;
     height: 80vh;
     width: 100%;
+    overflow: hidden;
 }
 
 .section header>div {
