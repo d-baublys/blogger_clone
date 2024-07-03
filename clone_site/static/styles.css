@@ -85,6 +85,14 @@ body {
     font-weight: 500;
 }
 
+.header--sticky .header-logo .logo-type {
+    color: #333;
+}
+
+.header-logo .logo-type use {
+    fill: currentColor;
+}
+
 header, footer, .main {
     position: relative;
     width: 100%;
@@ -368,6 +376,49 @@ body main, body header, body footer {
     box-shadow: 0 .125rem .1875rem rgba(0, 0, 0, .2);
     border-radius: 2rem;
     background: #ff8000;
+}
+
+.scrolldown .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: .3125rem;
+    color: #fff;
+    fill: currentColor;
+    animation: bounceArrow 8s cubic-bezier(.785, .135, .15, .86) infinite;
+}
+
+@keyframes bounceArrow {
+    0% {
+        transform: translate3d(0,0,0)
+    }
+
+    5% {
+        transform: translate3d(0,20%,0)
+    }
+
+    10% {
+        transform: translate3d(0,-20%,0)
+    }
+
+    15% {
+        transform: translate3d(0,20%,0)
+    }
+
+    20% {
+        transform: translate3d(0,-20%,0)
+    }
+
+    25% {
+        transform: translate3d(0,20%,0)
+    }
+
+    30% {
+        transform: translate3d(0,0,0)
+    }
+
+    100% {
+        transform: translate3d(0,0,0)
+    }
 }
 
 .container, .main, .footer__wrapper, .section header, footer section, footer hr {
