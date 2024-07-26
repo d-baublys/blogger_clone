@@ -36,7 +36,7 @@ window.onYouTubeIframeAPIReady = () => {
 };
 
 (function() {
-    var h, l = this;
+    var scrollHandler, windowReference = this;
 
     function getType(a) {
         if (a === null) return "null";
@@ -61,7 +61,7 @@ window.onYouTubeIframeAPIReady = () => {
         var b = getType(a);
         return "array" == b || "object" == b && "number" == typeof a.length
     }
-    function n(a) {
+    function stringCheck(a) {
         return "string" == typeof a
     }
     function p(a) {
@@ -107,40 +107,41 @@ window.onYouTubeIframeAPIReady = () => {
     }
     ;
     var t;
-    var ea = String.prototype.trim ? function(a) {
+    
+    var parseVersion = String.prototype.trim ? function(a) {
         return a.trim()
     }
     : function(a) {
         return a.replace(/^[\s\xa0]+|[\s\xa0]+$/g, "")
     }
     ;
-    function u(a, b) {
+    function compareValues(a, b) {
         return a < b ? -1 : a > b ? 1 : 0
     }
-    ;var v = Array.prototype.indexOf ? function(a, b, c) {
-        return Array.prototype.indexOf.call(a, b, c)
+    ;var functionForEach = Array.prototype.indexOf ? function(array, searchElement, fromIndex) {
+        return Array.prototype.indexOf.call(array, searchElement, fromIndex)
     }
     : function(a, b, c) {
         c = null == c ? 0 : 0 > c ? Math.max(0, a.length + c) : c;
-        if (n(a))
-            return n(b) && 1 == b.length ? a.indexOf(b, c) : -1;
+        if (stringCheck(a))
+            return stringCheck(b) && 1 == b.length ? a.indexOf(b, c) : -1;
         for (; c < a.length; c++)
             if (c in a && a[c] === b)
                 return c;
         return -1
     }
-      , w = Array.prototype.forEach ? function(a, b, c) {
-        Array.prototype.forEach.call(a, b, c)
+      , forEachElement = Array.prototype.forEach ? function(array, callback, thisArg) {
+        Array.prototype.forEach.call(array, callback, thisArg)
     }
     : function(a, b, c) {
-        for (var d = a.length, f = n(a) ? a.split("") : a, e = 0; e < d; e++)
+        for (var d = a.length, f = stringCheck(a) ? a.split("") : a, e = 0; e < d; e++)
             e in f && b.call(c, f[e], e, a)
     }
       , fa = Array.prototype.filter ? function(a, b, c) {
         return Array.prototype.filter.call(a, b, c)
     }
     : function(a, b, c) {
-        for (var d = a.length, f = [], e = 0, g = n(a) ? a.split("") : a, k = 0; k < d; k++)
+        for (var d = a.length, f = [], e = 0, g = stringCheck(a) ? a.split("") : a, k = 0; k < d; k++)
             if (k in g) {
                 var W = g[k];
                 b.call(c, W, k, a) && (f[e++] = W)
@@ -162,20 +163,22 @@ window.onYouTubeIframeAPIReady = () => {
     }
     function ja(a, b) {
         return a > b ? 1 : a < b ? -1 : 0
-    }
-    ;var x;
+    };
+    
+    var navigatorUserAgent;
     a: {
-        var ka = l.navigator;
-        if (ka) {
-            var la = ka.userAgent;
-            if (la) {
-                x = la;
-                break a
+            var navigatorObject = windowReference.navigator;
+            if (navigatorObject) {
+                var userAgentString = navigatorObject.userAgent;
+                if (userAgentString) {
+                    navigatorUserAgent = userAgentString;
+                    break a
+                }
             }
         }
-        x = ""
-    }
-    ;function ma(a, b) {
+        navigatorUserAgent = ""
+    
+    function ma(a, b) {
         for (var c in a)
             if (b.call(void 0, a[c], c, a))
                 return !0;
@@ -187,71 +190,75 @@ window.onYouTubeIframeAPIReady = () => {
     }
     y[" "] = function() {}
     ;
-    function na(a, b) {
-        var c = oa;
-        return Object.prototype.hasOwnProperty.call(c, a) ? c[a] : c[a] = b(a)
-    }
-    ;var pa = -1 != x.indexOf("Opera")
-      , z = -1 != x.indexOf("Trident") || -1 != x.indexOf("MSIE")
-      , qa = -1 != x.indexOf("Edge")
-      , A = -1 != x.indexOf("Gecko") && !(-1 != x.toLowerCase().indexOf("webkit") && -1 == x.indexOf("Edge")) && !(-1 != x.indexOf("Trident") || -1 != x.indexOf("MSIE")) && -1 == x.indexOf("Edge")
-      , B = -1 != x.toLowerCase().indexOf("webkit") && -1 == x.indexOf("Edge");
-    function ra() {
-        var a = l.document;
+    function compareVersion(version, comparisonFunction) {
+        var versionCache = versionCacheMap;
+        return Object.prototype.hasOwnProperty.call(versionCache, version) ? versionCache[version] : versionCache[version] = comparisonFunction(version)
+    };
+    
+    var isOpera = -1 != navigatorUserAgent.indexOf("Opera")
+      , isTrident = -1 != navigatorUserAgent.indexOf("Trident") || -1 != navigatorUserAgent.indexOf("MSIE")
+      , isEdge = -1 != navigatorUserAgent.indexOf("Edge")
+      , isGecko = -1 != navigatorUserAgent.indexOf("Gecko") && !(-1 != navigatorUserAgent.toLowerCase().indexOf("webkit") && -1 == navigatorUserAgent.indexOf("Edge")) && !(-1 != navigatorUserAgent.indexOf("Trident") || -1 != navigatorUserAgent.indexOf("MSIE")) && -1 == navigatorUserAgent.indexOf("Edge")
+      , isWebKit = -1 != navigatorUserAgent.toLowerCase().indexOf("webkit") && -1 == navigatorUserAgent.indexOf("Edge");
+    
+    function placeholder2() {
+        var a = windowReference.document;
         return a ? a.documentMode : void 0
     }
-    var C;
+    var placeholder1;
     a: {
         var D = ""
           , E = function() {
-            var a = x;
-            if (A)
+            var a = navigatorUserAgent;
+            if (isGecko)
                 return /rv\:([^\);]+)(\)|;)/.exec(a);
-            if (qa)
+            if (isEdge)
                 return /Edge\/([\d\.]+)/.exec(a);
-            if (z)
+            if (isTrident)
                 return /\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/.exec(a);
-            if (B)
+            if (isWebKit)
                 return /WebKit\/(\S+)/.exec(a);
-            if (pa)
+            if (isOpera)
                 return /(?:Version)[ \/]?(\S+)/.exec(a)
         }();
         E && (D = E ? E[1] : "");
-        if (z) {
-            var sa = ra();
+        if (isTrident) {
+            var sa = placeholder2();
             if (null != sa && sa > parseFloat(D)) {
-                C = String(sa);
+                placeholder1 = String(sa);
                 break a
             }
         }
-        C = D
+        placeholder1 = D
     }
-    var oa = {};
-    function F(a) {
-        return na(a, function() {
-            for (var b = 0, c = ea(String(C)).split("."), d = ea(String(a)).split("."), f = Math.max(c.length, d.length), e = 0; 0 == b && e < f; e++) {
-                var g = c[e] || ""
-                  , k = d[e] || "";
+
+    var versionCacheMap = {};
+
+    function checkVersion(version) {
+        return compareVersion(version, function() {
+            for (var comparison = 0, userAgentVersion = parseVersion(String(placeholder1)).split("."), specifiedVersion = parseVersion(String(version)).split("."), f = Math.max(userAgentVersion.length, specifiedVersion.length), i = 0; 0 == comparison && i < f; i++) {
+                var userAgentPart = userAgentVersion[i] || ""
+                  , specifiedPart = specifiedVersion[i] || "";
                 do {
-                    g = /(\d*)(\D*)(.*)/.exec(g) || ["", "", "", ""];
-                    k = /(\d*)(\D*)(.*)/.exec(k) || ["", "", "", ""];
-                    if (0 == g[0].length && 0 == k[0].length)
+                    userAgentPart = /(\d*)(\D*)(.*)/.exec(userAgentPart) || ["", "", "", ""];
+                    specifiedPart = /(\d*)(\D*)(.*)/.exec(specifiedPart) || ["", "", "", ""];
+                    if (0 == userAgentPart[0].length && 0 == specifiedPart[0].length)
                         break;
-                    b = u(0 == g[1].length ? 0 : parseInt(g[1], 10), 0 == k[1].length ? 0 : parseInt(k[1], 10)) || u(0 == g[2].length, 0 == k[2].length) || u(g[2], k[2]);
-                    g = g[3];
-                    k = k[3]
-                } while (0 == b)
+                    comparison = compareValues(0 == userAgentPart[1].length ? 0 : parseInt(userAgentPart[1], 10), 0 == specifiedPart[1].length ? 0 : parseInt(specifiedPart[1], 10)) || compareValues(0 == userAgentPart[2].length, 0 == specifiedPart[2].length) || compareValues(userAgentPart[2], specifiedPart[2]);
+                    userAgentPart = userAgentPart[3];
+                    specifiedPart = specifiedPart[3]
+                } while (0 == comparison)
             }
-            return 0 <= b
+            return 0 <= comparison
         })
     }
-    var ta = l.document
-      , ua = ta && z ? ra() || ("CSS1Compat" == ta.compatMode ? parseInt(C, 10) : 5) : void 0;
-    var va = !z || 9 <= Number(ua)
-      , wa = z && !F("9");
-    !B || F("528");
-    A && F("1.9b") || z && F("8") || pa && F("9.5") || B && F("528");
-    A && !F("8") || z && F("9");
+    var ta = windowReference.document
+      , ua = ta && isTrident ? placeholder2() || ("CSS1Compat" == ta.compatMode ? parseInt(placeholder1, 10) : 5) : void 0;
+    var va = !isTrident || 9 <= Number(ua)
+      , wa = isTrident && !checkVersion("9");
+    !isWebKit || checkVersion("528");
+    isGecko && checkVersion("1.9b") || isTrident && checkVersion("8") || isOpera && checkVersion("9.5") || isWebKit && checkVersion("528");
+    isGecko && !checkVersion("8") || isTrident && checkVersion("9");
     function G(a, b) {
         r.call(this, a ? a.type : "");
         this.relatedTarget = this.currentTarget = this.target = null;
@@ -280,7 +287,7 @@ window.onYouTubeIframeAPIReady = () => {
         this.currentTarget = b;
         var f = a.relatedTarget;
         if (f) {
-            if (A) {
+            if (isGecko) {
                 var e;
                 a: {
                     try {
@@ -295,8 +302,8 @@ window.onYouTubeIframeAPIReady = () => {
         } else
             "mouseover" == c ? f = a.fromElement : "mouseout" == c && (f = a.toElement);
         this.relatedTarget = f;
-        null === d ? (this.offsetX = B || void 0 !== a.offsetX ? a.offsetX : a.layerX,
-        this.offsetY = B || void 0 !== a.offsetY ? a.offsetY : a.layerY,
+        null === d ? (this.offsetX = isWebKit || void 0 !== a.offsetX ? a.offsetX : a.layerX,
+        this.offsetY = isWebKit || void 0 !== a.offsetY ? a.offsetY : a.layerY,
         this.clientX = void 0 !== a.clientX ? a.clientX : a.pageX,
         this.clientY = void 0 !== a.clientY ? a.clientY : a.pageY,
         this.screenX = a.screenX || 0,
@@ -387,7 +394,7 @@ window.onYouTubeIframeAPIReady = () => {
     function Ca(a, b) {
         var c = b.type;
         if (c in a.b) {
-            var d = a.b[c], f = v(d, b), e;
+            var d = a.b[c], f = functionForEach(d, b), e;
             (e = 0 <= f) && Array.prototype.splice.call(d, f, 1);
             e && (Aa(b),
             0 == a.b[c].length && (delete a.b[c],
@@ -501,7 +508,7 @@ window.onYouTubeIframeAPIReady = () => {
             if (!(c = b))
                 a: {
                     c = ["window", "event"];
-                    for (var d = l, f; f = c.shift(); )
+                    for (var d = windowReference, f; f = c.shift(); )
                         if (null != d[f])
                             d = d[f];
                         else {
@@ -564,49 +571,50 @@ window.onYouTubeIframeAPIReady = () => {
             a = q(a.handleEvent, a);
         else
             throw Error("Invalid listener argument");
-        return 2147483647 < Number(b) ? -1 : l.setTimeout(a, b || 0)
+        return 2147483647 < Number(b) ? -1 : windowReference.setTimeout(a, b || 0)
     }
-    ;!A && !z || z && 9 <= Number(ua) || A && F("1.9.1");
-    z && F("9");
-    function K(a, b) {
+    ;!isGecko && !isTrident || isTrident && 9 <= Number(ua) || isGecko && checkVersion("1.9.1");
+    isTrident && checkVersion("9");
+
+    function Point(a, b) {
         this.x = void 0 !== a ? a : 0;
         this.y = void 0 !== b ? b : 0
     }
-    h = K.prototype;
-    h.clone = function() {
-        return new K(this.x,this.y)
+    scrollHandler = Point.prototype;
+    scrollHandler.clone = function() {
+        return new Point(this.x,this.y)
     }
     ;
-    h.toString = function() {
+    scrollHandler.toString = function() {
         return "(" + this.x + ", " + this.y + ")"
     }
     ;
-    h.ceil = function() {
+    scrollHandler.ceil = function() {
         this.x = Math.ceil(this.x);
         this.y = Math.ceil(this.y);
         return this
     }
     ;
-    h.floor = function() {
+    scrollHandler.floor = function() {
         this.x = Math.floor(this.x);
         this.y = Math.floor(this.y);
         return this
     }
     ;
-    h.round = function() {
+    scrollHandler.round = function() {
         this.x = Math.round(this.x);
         this.y = Math.round(this.y);
         return this
     }
     ;
-    h.translate = function(a, b) {
-        a instanceof K ? (this.x += a.x,
+    scrollHandler.translate = function(a, b) {
+        a instanceof Point ? (this.x += a.x,
         this.y += a.y) : (this.x += Number(a),
         p(b) && (this.y += b));
         return this
     }
     ;
-    h.scale = function(a, b) {
+    scrollHandler.scale = function(a, b) {
         var c = p(b) ? b : a;
         this.x *= a;
         this.y *= c;
@@ -617,34 +625,34 @@ window.onYouTubeIframeAPIReady = () => {
         this.width = a;
         this.height = b
     }
-    h = L.prototype;
-    h.clone = function() {
+    scrollHandler = L.prototype;
+    scrollHandler.clone = function() {
         return new L(this.width,this.height)
     }
     ;
-    h.toString = function() {
+    scrollHandler.toString = function() {
         return "(" + this.width + " x " + this.height + ")"
     }
     ;
-    h.ceil = function() {
+    scrollHandler.ceil = function() {
         this.width = Math.ceil(this.width);
         this.height = Math.ceil(this.height);
         return this
     }
     ;
-    h.floor = function() {
+    scrollHandler.floor = function() {
         this.width = Math.floor(this.width);
         this.height = Math.floor(this.height);
         return this
     }
     ;
-    h.round = function() {
+    scrollHandler.round = function() {
         this.width = Math.round(this.width);
         this.height = Math.round(this.height);
         return this
     }
     ;
-    h.scale = function(a, b) {
+    scrollHandler.scale = function(a, b) {
         var c = p(b) ? b : a;
         this.width *= a;
         this.height *= c;
@@ -682,7 +690,7 @@ window.onYouTubeIframeAPIReady = () => {
             for (e = d = 0; g = a[e]; e++) {
                 var f = g.className, k;
                 if (k = "function" == typeof f.split)
-                    k = 0 <= v(f.split(/\s+/), b);
+                    k = 0 <= functionForEach(f.split(/\s+/), b);
                 k && (c[d++] = g)
             }
             c.length = d;
@@ -695,14 +703,14 @@ window.onYouTubeIframeAPIReady = () => {
           , a = "CSS1Compat" == a.compatMode ? a.documentElement : a.body;
         return new L(a.clientWidth,a.clientHeight)
     }
-    function Qa(a) {
-        var b = a.scrollingElement ? a.scrollingElement : B || "CSS1Compat" != a.compatMode ? a.body || a.documentElement : a.documentElement;
-        a = a.parentWindow || a.defaultView;
-        return z && F("10") && a.pageYOffset != b.scrollTop ? new K(b.scrollLeft,b.scrollTop) : new K(a.pageXOffset || b.scrollLeft,a.pageYOffset || b.scrollTop)
+    function getScrollPosition(element) {
+        var scrollElement = element.scrollingElement ? element.scrollingElement : isWebKit || "CSS1Compat" != element.compatMode ? element.body || element.documentElement : element.documentElement;
+        element = element.parentWindow || element.defaultView;
+        return isTrident && checkVersion("10") && element.pageYOffset != scrollElement.scrollTop ? new Point(scrollElement.scrollLeft,scrollElement.scrollTop) : new Point(element.pageXOffset || scrollElement.scrollLeft,element.pageYOffset || scrollElement.scrollTop)
     }
     function Ra(a, b, c) {
         function d(c) {
-            c && b.appendChild(n(c) ? a.createTextNode(c) : c)
+            c && b.appendChild(stringCheck(c) ? a.createTextNode(c) : c)
         }
         for (var f = 1; f < c.length; f++) {
             var e = c[f];
@@ -723,7 +731,7 @@ window.onYouTubeIframeAPIReady = () => {
                     }
                     g = !1
                 }
-                w(g ? ha(e) : e, d)
+                forEachElement(g ? ha(e) : e, d)
             }
         }
     }
@@ -731,8 +739,8 @@ window.onYouTubeIframeAPIReady = () => {
         for (var b; b = a.firstChild; )
             a.removeChild(b)
     }
-    function O(a) {
-        return 9 == a.nodeType ? a : a.ownerDocument || a.document
+    function getDocument(element) {
+        return 9 == element.nodeType ? element : element.ownerDocument || element.document
     }
     function Ta(a, b) {
         var c = [];
@@ -749,30 +757,30 @@ window.onYouTubeIframeAPIReady = () => {
         return !1
     }
     function P(a) {
-        this.u = a || l.document || document
+        this.u = a || windowReference.document || document
     }
-    h = P.prototype;
-    h.getElementsByTagName = function(a, b) {
+    scrollHandler = P.prototype;
+    scrollHandler.getElementsByTagName = function(a, b) {
         return (b || this.u).getElementsByTagName(a)
     }
     ;
-    h.createElement = function(a) {
+    scrollHandler.createElement = function(a) {
         return this.u.createElement(String(a))
     }
     ;
-    h.createTextNode = function(a) {
+    scrollHandler.createTextNode = function(a) {
         return this.u.createTextNode(String(a))
     }
     ;
-    h.appendChild = function(a, b) {
+    scrollHandler.appendChild = function(a, b) {
         a.appendChild(b)
     }
     ;
-    h.append = function(a, b) {
-        Ra(O(a), a, arguments)
+    scrollHandler.append = function(a, b) {
+        Ra(getDocument(a), a, arguments)
     }
     ;
-    h.canHaveChildren = function(a) {
+    scrollHandler.canHaveChildren = function(a) {
         if (1 != a.nodeType)
             return !1;
         switch (a.tagName) {
@@ -806,11 +814,11 @@ window.onYouTubeIframeAPIReady = () => {
         return !0
     }
     ;
-    h.removeNode = function(a) {
+    scrollHandler.removeNode = function(a) {
         return a && a.parentNode ? a.parentNode.removeChild(a) : null
     }
     ;
-    h.contains = function(a, b) {
+    scrollHandler.contains = function(a, b) {
         if (!a || !b)
             return !1;
         if (a.contains && 1 == b.nodeType)
@@ -822,23 +830,23 @@ window.onYouTubeIframeAPIReady = () => {
         return b == a
     }
     ;
-    function Va(a) {
-        if (a.classList)
-            return a.classList;
-        a = a.className;
-        return n(a) && a.match(/\S+/g) || []
+    function elementClasses(element) {
+        if (element.classList)
+            return element.classList;
+        element = element.className;
+        return stringCheck(element) && element.match(/\S+/g) || []
     }
-    function Wa(a, b) {
+    function hasClass(element, className) {
         var c;
-        a.classList ? c = a.classList.contains(b) : (c = Va(a),
-        c = 0 <= v(c, b));
+        element.classList ? c = element.classList.contains(className) : (c = elementClasses(element),
+        c = 0 <= functionForEach(c, className));
         return c
     }
-    function Q(a, b) {
-        a.classList ? a.classList.add(b) : Wa(a, b) || (a.className += 0 < a.className.length ? " " + b : b)
+    function addClass(element, className) {
+        element.classList ? element.classList.add(className) : hasClass(element, className) || (element.className += 0 < element.className.length ? " " + className : className)
     }
     function R(a, b) {
-        a.classList ? a.classList.remove(b) : Wa(a, b) && (a.className = fa(Va(a), function(a) {
+        a.classList ? a.classList.remove(b) : hasClass(a, b) && (a.className = fa(elementClasses(a), function(a) {
             return a != b
         }).join(" "))
     }
@@ -854,53 +862,53 @@ window.onYouTubeIframeAPIReady = () => {
                 bottom: 0
             }
         }
-        z && a.ownerDocument.body && (a = a.ownerDocument,
+        isTrident && a.ownerDocument.body && (a = a.ownerDocument,
         b.left -= a.documentElement.clientLeft + a.body.clientLeft,
         b.top -= a.documentElement.clientTop + a.body.clientTop);
         return b
     }
-    function Ya(a) {
-        var b = Za, c;
+    function getStyles(element) {
+        var computedStyleFn = getElementComputedStyle, computedStyle;
         a: {
-            c = O(a);
-            if (c.defaultView && c.defaultView.getComputedStyle && (c = c.defaultView.getComputedStyle(a, null))) {
-                c = c.display || c.getPropertyValue("display") || "";
+            computedStyle = getDocument(element);
+            if (computedStyle.defaultView && computedStyle.defaultView.getComputedStyle && (computedStyle = computedStyle.defaultView.getComputedStyle(element, null))) {
+                computedStyle = computedStyle.display || computedStyle.getPropertyValue("display") || "";
                 break a
             }
-            c = ""
+            computedStyle = ""
         }
-        if ("none" != (c || (a.currentStyle ? a.currentStyle.display : null) || a.style && a.style.display))
-            return b(a);
-        c = a.style;
-        var d = c.display
-          , f = c.visibility
-          , e = c.position;
-        c.visibility = "hidden";
-        c.position = "absolute";
-        c.display = "inline";
-        a = b(a);
-        c.display = d;
-        c.position = e;
-        c.visibility = f;
-        return a
+        if ("none" != (computedStyle || (element.currentStyle ? element.currentStyle.display : null) || element.style && element.style.display))
+            return computedStyleFn(element);
+        computedStyle = element.style;
+        var display = computedStyle.display
+          , visibility = computedStyle.visibility
+          , position = computedStyle.position;
+        computedStyle.visibility = "hidden";
+        computedStyle.position = "absolute";
+        computedStyle.display = "inline";
+        element = computedStyleFn(element);
+        computedStyle.display = display;
+        computedStyle.position = position;
+        computedStyle.visibility = visibility;
+        return element
     }
-    function Za(a) {
+    function getElementComputedStyle(a) {
         var b = a.offsetWidth
           , c = a.offsetHeight
-          , d = B && !b && !c;
+          , d = isWebKit && !b && !c;
         return (void 0 === b || d) && a.getBoundingClientRect ? (a = Xa(a),
         new L(a.right - a.left,a.bottom - a.top)) : new L(b,c)
     }
-    ;var $a = !z;
+    ;var $a = !isTrident;
     function S() {
         this.B = this.s = null
     }
     S.prototype.za = function() {
-        Q(this.s, "no-scrolling")
+        addClass(this.s, "no-scrolling")
     }
     ;
     S.prototype.m = function() {
-        this.B && this.B && (l.clearTimeout(this.B),
+        this.B && this.B && (windowReference.clearTimeout(this.B),
         this.B = null);
         R(this.s, "no-scrolling");
         this.B = J(this.za, 200, this)
@@ -919,7 +927,7 @@ window.onYouTubeIframeAPIReady = () => {
         this.j = !1;
         this.aa();
         I(window, "resize", this.aa, !1, this);
-        ab(this, U(), this.i, 800, bb)
+        ab(this, getWindowScrollOffset(), this.i, 800, bb)
     }
     var bb = "toaster_ease_in_out"
       , cb = {
@@ -929,7 +937,7 @@ window.onYouTubeIframeAPIReady = () => {
         Ca: "toaster_linear"
     };
     function ab(a, b, c, d, f) {
-        a.C = null === b || "undefined" === typeof b ? U() : b;
+        a.C = null === b || "undefined" === typeof b ? getWindowScrollOffset() : b;
         a.N = null === c || "undefined" === typeof c ? a.i : c;
         a.C = Math.min(Math.max(a.C, 0), a.i);
         a.N = Math.min(Math.max(a.N, 0), a.i);
@@ -946,7 +954,7 @@ window.onYouTubeIframeAPIReady = () => {
         b || (a.H = "toaster_ease_out")
     }
     T.prototype.aa = function() {
-        this.$ = Ya(this.s).height;
+        this.$ = getStyles(this.s).height;
         this.D = Pa().height;
         this.i = this.$ - this.D
     }
@@ -983,8 +991,8 @@ window.onYouTubeIframeAPIReady = () => {
     function db(a) {
         window.scrollTo ? window.scrollTo(0, a) : window.scroll && window.scroll(0, a)
     }
-    function U() {
-        return window.scrollY || window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop || Qa(document).y
+    function getWindowScrollOffset() {
+        return window.scrollY || document.body.scrollTop || document.documentElement.scrollTop || getScrollPosition(document).y
     }
     function V() {
         this.ka = new T;
@@ -999,14 +1007,14 @@ window.onYouTubeIframeAPIReady = () => {
         c = new c(d,"");
         b = b.replace(c, "");
         c = document;
-        if (b = n(b) ? c.getElementById(b) : b)
+        if (b = stringCheck(b) ? c.getElementById(b) : b)
             a.preventDefault(),
-            c = O(b),
-            a = new K(0,0),
-            d = c ? O(c) : document,
-            d = !z || 9 <= Number(ua) || "CSS1Compat" == (d ? new P(O(d)) : t || (t = new P)).u.compatMode ? d.documentElement : d.body,
+            c = getDocument(b),
+            a = new Point(0,0),
+            d = c ? getDocument(c) : document,
+            d = !isTrident || 9 <= Number(ua) || "CSS1Compat" == (d ? new P(getDocument(d)) : t || (t = new P)).u.compatMode ? d.documentElement : d.body,
             b != d && (b = Xa(b),
-            c = Qa((c ? new P(O(c)) : t || (t = new P)).u),
+            c = getScrollPosition((c ? new P(getDocument(c)) : t || (t = new P)).u),
             a.x = b.left + c.x,
             a.y = b.top + c.y),
             ab(this.ka, null, a.y - this.ea, this.Ea, null),
@@ -1014,7 +1022,7 @@ window.onYouTubeIframeAPIReady = () => {
     }
     ;
     V.prototype.L = function() {
-        w(this.ia, function(a) {
+        forEachElement(this.ia, function(a) {
             I(a, "click", this.f, !1, this)
         }, this)
     }
@@ -1022,7 +1030,7 @@ window.onYouTubeIframeAPIReady = () => {
     V.prototype.a = function() {
         this.ia = M("js-scroll-to");
         this.fa = N("header");
-        this.ea = Ya(this.fa).height;
+        this.ea = getStyles(this.fa).height;
         this.L()
     }
     ;
@@ -1033,7 +1041,7 @@ window.onYouTubeIframeAPIReady = () => {
         this.c = 0
     }
     X.prototype.m = function() {
-        this.c = U();
+        this.c = getWindowScrollOffset();
         eb(this)
     }
     ;
@@ -1044,7 +1052,7 @@ window.onYouTubeIframeAPIReady = () => {
     ;
     function eb(a) {
         a.l && a.c >= a.A || !a.l && a.c <= a.A || (a.c >= a.A ? a.l || (a.l = !0,
-        Q(a.da, "header--sticky")) : a.l && (a.l = !1,
+        addClass(a.da, "header--sticky")) : a.l && (a.l = !1,
         R(a.da, "header--sticky")))
     }
     X.prototype.L = function() {
@@ -1059,42 +1067,44 @@ window.onYouTubeIframeAPIReady = () => {
     ;
     function fb() {
         this.c = 0;
-        this.na = [];
+        this.scrollHandlers = [];
         this.D = -1;
         this.j = !1
     }
-    h = fb.prototype;
-    h.a = function() {
+    scrollHandler = fb.prototype;
+    scrollHandler.a = function() {
         this.D = Pa().height;
-        this.na = M("section");
+        this.scrollHandlers = M("section");
         this.h();
         J(q(function() {
             this.m()
         }, this), 1500)
     }
     ;
-    h.h = function() {
+    scrollHandler.h = function() {
         I(window, "scroll", this.m, !1, this);
         I(window, "resize", this.wa, !1, this)
     }
     ;
-    h.wa = function() {
+    scrollHandler.wa = function() {
         this.D = Pa().height
     }
     ;
-    h.m = function() {
+    scrollHandler.m = function() {
         this.j || requestAnimationFrame(q(this.ya, this));
         this.j = !0
     }
     ;
-    h.ya = function() {
-        this.j = !1;
-        this.c = U();
-        w(this.na, function(a) {
-            this.c >= a.offsetTop - .9 * Ya(a).height && this.c < a.offsetTop && 0 < this.c && Q(a, "active")
+    scrollHandler.onScroll = function() {
+        this.isScrolling = false;
+        this.scrollOffset = getWindowScrollOffset();
+        forEachElement(this.scrollHandlers, function(element) {
+            this.scrollOffset >= element.offsetTop - 0.9 * getStyles(element).height &&
+            this.scrollOffset < element.offsetTop &&
+            this.scrollOffset && addClass(element, "active") > 0
         }, this)
-    }
-    ;
+    };
+
     function gb() {
         this.o = [];
         this.ba = null;
@@ -1113,7 +1123,7 @@ window.onYouTubeIframeAPIReady = () => {
         if (!this.o)
             return console.log("Error: No hero themes found");
         for (var a = 0, b = 0, c = this.o.length; b < c; b++)
-            Wa(this.o[b], "active") && (a = b);
+            hasClass(this.o[b], "active") && (a = b);
         this.h();
         hb(this, a)
     }
@@ -1130,7 +1140,7 @@ window.onYouTubeIframeAPIReady = () => {
         b = b >= a.J ? 0 : b;
         var c = a.o[b];
         0 === b ? a.id = "Hero Family (Green): Create your blog" : 1 === b ? a.id = "Hero Tech (Blue): Create your blog" : 2 === b && (a.id = "Hero Cooking (Red): Create your blog");
-        Q(c, "active");
+        addClass(c, "active");
         a.W = c;
         a.G++;
         c = a.qa;
@@ -1229,7 +1239,7 @@ window.onYouTubeIframeAPIReady = () => {
             b.preventDefault();
             a.f(b, "Language Toggler: Opened", "")
         });
-        this.O && w(this.O, function(b) {
+        this.O && forEachElement(this.O, function(b) {
             I(b, "click", function(c) {
                 c.preventDefault();
                 var d = "Footer " + ($a && b.dataset ? "track"in b.dataset ? b.dataset.track : null : b.getAttribute("data-" + "track".replace(/([A-Z])/g, "-$1").toLowerCase()));
