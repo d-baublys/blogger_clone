@@ -113,6 +113,7 @@ body main, body header, body footer {
 .section.hero {
     flex-direction: column;
     height: 100vh;
+    min-height: 43.75rem;
     background: #388d80;
     z-index: 2;
     overflow: visible;
@@ -152,6 +153,10 @@ body main, body header, body footer {
     background-color: #2f454f;
 }
 
+.hero-background .theme.active {
+    opacity: 1;
+}
+
 .hero-background .theme.green {
     background: #388d80;
 }
@@ -162,10 +167,6 @@ body main, body header, body footer {
 
 .hero-background .theme.red {
     background: #bc382e;
-}
-
-.hero-background .theme.active {
-    opacity: 1;
 }
 
 .hero-background .theme {
@@ -180,9 +181,9 @@ body main, body header, body footer {
 }
 
 .theme--layer {
+    position: absolute;
     transition: 1.4s cubic-bezier(.645, .045, .355, 1) transform;
     transform: translateY(100vh);
-    position: absolute;
 }
 
 .active .theme--layer {
@@ -366,7 +367,6 @@ body main, body header, body footer {
 }
 
 .scrolldown {
-    transform: translateY(50%);
     position: absolute;
     z-index: 1;
     bottom: 3rem;
@@ -376,6 +376,7 @@ body main, body header, body footer {
     box-shadow: 0 .125rem .1875rem rgba(0, 0, 0, .2);
     border-radius: 2rem;
     background: #ff8000;
+    transform: translateY(50%);
 }
 
 .scrolldown .icon {
@@ -475,21 +476,27 @@ body main, body header, body footer {
 }
 
 .design1 {
-    transition-duration: .7s;
-    transition-delay: .2s;
     right: 0;
     bottom: 0;
     max-width: 56.25rem;
     width: 59%;
+    transform: translate3d(30%, 100%, 0);
+    transition-duration: .7s;
+    transition-delay: .2s;
 }
 
 .design2 {
-    transition-duration: .9s;
-    transition-delay: .1s;
     right: 0;
     bottom: 0;
     max-width: 50rem;
     width: 55%;
+    transform: translate3d(20%, 100%, 0);
+    transition-duration: .9s;
+    transition-delay: .1s;
+}
+
+.section.active:not(.hero) .background--layer {
+    transform: translateX(0);
 }
 
 .section.active .background--layer.design1 {
@@ -509,6 +516,7 @@ body main, body header, body footer {
     right: -15%;
     top: 40%;
     bottom: 7%;
+    transform: translateX(125%);
     transition-duration: 1.4s;
 }
 
@@ -517,6 +525,8 @@ body main, body header, body footer {
     right: -3%;
     top: 47%;
     bottom: -11%;
+    transform: translateX(100%);
+    transition-duration: .7s;
     transition-delay: .2s;
 }
 
@@ -525,6 +535,8 @@ body main, body header, body footer {
     right: -2%;
     top: 29%;
     bottom: 15%;
+    transform: translateX(100%);
+    transition-duration: .7s;
     transition-delay: .3s;
 }
 
@@ -533,6 +545,9 @@ body main, body header, body footer {
     right: -10%;
     top: 15%;
     display: block;
+    transform: translateX(100%);
+    transition-duration: .7s;
+    transition-delay: .4s;
 }
 
 .earn-money .background {
@@ -546,14 +561,16 @@ body main, body header, body footer {
     display: block;
     max-height: 70%;
     max-width: 44%;
-    transition-duration: .8s;
     position: relative;
+    transform: translate3d(-10%, 0, 0);
+    transition-duration: .8s;
 }
 
 .card {
     right: 14%;
     width: 16.25rem;
     bottom: -9%;
+    transform: translate3d(20%, 90%, 0);
     transition-duration: .9s;
     transition-delay: .1s;
 }
@@ -562,15 +579,17 @@ body main, body header, body footer {
     right: -1%;
     bottom: -15%;
     width: 17.5rem;
-    transition-duration: .1s;
+    transform: translate3d(30%, 100%, 0);
+    transition-duration: 1s;
     transition-delay: .2s;
 }
 
 .cent {
+    transform: translate3d(70%, 85%, 0);
+    transition-duration: .8s;
     right: 1%;
     bottom: 27%;
     width: 4.6875rem;
-    transition-duration: .8s;
 }
 
 .know-your-audience .background {
@@ -604,11 +623,25 @@ body main, body header, body footer {
     margin-top: 0;
 }
 
+.know-your-audience .background .background--layer {
+    transition-timing-function: cubic-bezier(.645, .045, .355, 1);
+    transition-property: opacity;
+    transition-duration: .4s;
+    position: relative;
+    float: right;
+    opacity: 0;
+}
+
+.know-your-audience.active .background .background--layer {
+    opacity: 1;
+}
+
 .histogram {
     display: block;
     margin-top: -5px;
     margin-right: -1%;
     width: 40%;
+    transition-delay: .4s;
 }
 
 .chart {
@@ -617,14 +650,6 @@ body main, body header, body footer {
     margin-top: -.4%;
     width: 35.5%;
     transition-delay: .6s;
-}
-
-.know-your-audience .background .background--layer {
-    transition-timing-function: cubic-bezier(.645, .045, .355, 1);
-    transition-property: opacity;
-    transition-duration: .4s;
-    position: relative;
-    float: right;
 }
 
 .memories .background {
@@ -638,6 +663,7 @@ body main, body header, body footer {
     left: initial;
     bottom: initial;
     width: 17%;
+    transform: translate3d(-5%, 10%, 0) rotate(5deg);
     transition-duration: 1s;
 }
 
@@ -647,6 +673,7 @@ body main, body header, body footer {
     left: initial;
     bottom: initial;
     width: 23%;
+    transform: translate3d(26%, 18%, 0) rotate(8deg);
     transition-duration: 1s;
 }
 
@@ -655,6 +682,7 @@ body main, body header, body footer {
     top: 34%;
     bottom: -6%;
     width: 20%;
+    transform: translate3d(30%, -15%, 0) rotate(6deg);
     transition-duration: 1s;
 }
 
