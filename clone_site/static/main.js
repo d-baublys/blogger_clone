@@ -32,6 +32,7 @@ sections.forEach(section => {
 });
 
 const themes = document.querySelectorAll(".theme.js-theme");
+const themesParent = document.querySelector(".hero-background");
 
 let currentIndex = 0;
 
@@ -41,6 +42,16 @@ function updateActiveTheme() {
     currentIndex = (currentIndex + 1) % themes.length;
 }
 
-updateActiveTheme();
+function removeNoTransition() {
+    themesParent.classList.remove("no-transition");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (currentIndex === 0) {
+        themesParent.classList.add("no-transition");
+        setTimeout(removeNoTransition, 0);
+    }
+    updateActiveTheme();
+});
 
 setInterval(updateActiveTheme, 5000);

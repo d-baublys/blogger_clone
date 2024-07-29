@@ -85,12 +85,63 @@ body {
     font-weight: 500;
 }
 
+.create-blog {
+    padding: .875rem 1.25rem;
+    background: #ff8000;
+    font-weight: 500;
+    font-size: .8125rem;
+}
+
+.header-content .sign-in span {
+    vertical-align: middle;
+}
+
+.header-content .create-blog {
+    padding: .625rem 1rem;
+    font-size: .875rem;
+    margin-right: .5rem;
+    visibility: hidden;
+    background: #ff8000;
+    transition: .3s visibility cubic-bezier(0.645, 0.045, 0.355, 1),
+    .3s transform cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: translateY(-120%);
+}
+
 .header--sticky .header-logo .logo-type {
     color: #333;
 }
 
+.header--sticky .header-content .sign-in {
+    position: relative;
+    top: 0;
+    right: 0;
+    opacity: 1;
+    color: #2f454f;
+}
+
+.header--sticky .header-content .create-blog {
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.header--sticky .header-underlay {
+    transform: translateY(0);
+}
+
 .header-logo .logo-type use {
     fill: currentColor;
+}
+
+.header-underlay {
+    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1) transform;
+    transform: translateY(-100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: #fff;
 }
 
 header, footer, .main {
@@ -101,13 +152,6 @@ header, footer, .main {
 
 body main, body header, body footer {
     color: #fff
-}
-
-.create-blog {
-    padding: .875rem 1.25rem;
-    background: #ff8000;
-    font-weight: 500;
-    font-size: .8125rem;
 }
 
 .section.hero {
@@ -178,6 +222,11 @@ body main, body header, body footer {
     left: 0;
     opacity: 0;
     overflow: hidden;
+}
+
+.no-transition .theme.green.active,
+.no-transition .theme.green.active * {
+    transition: none;
 }
 
 .theme--layer {
@@ -865,7 +914,6 @@ footer section.meta>div {
 
 select {
     font: inherit;
-    -webkit-appearance: none;
 }
 
 a {
