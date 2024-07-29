@@ -3,9 +3,9 @@ const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
 
 window.addEventListener("scroll", () => {
     if (window.scrollY > pageHeight * 0.01) {
-        header.classList.add("header--sticky");
+        header.classList.add("sticky");
     } else {
-        header.classList.remove("header--sticky");
+        header.classList.remove("sticky");
     }
 });
 
@@ -20,7 +20,7 @@ const options = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            if (!entry.target.classList.contains("hero")) {
+            if (!entry.target.classList.contains("publish")) {
                 entry.target.classList.add("active");
             }
         }
@@ -32,7 +32,7 @@ sections.forEach(section => {
 });
 
 const themes = document.querySelectorAll(".theme.js-theme");
-const themesParent = document.querySelector(".hero-background");
+const themesParent = document.querySelector(".publish-background");
 
 let currentIndex = 0;
 
