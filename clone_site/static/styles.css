@@ -476,6 +476,12 @@ body main, body header, body footer {
     max-width: 80%;
 }
 
+@media screen and (min-width: 75rem) {
+    .container, .main, .footer__wrapper, .section header, footer section, footer hr {
+        max-width: 80%;
+    }
+}
+
 .section {
     display: flex;
     position: relative;
@@ -845,7 +851,14 @@ footer hr {
 }
 
 footer section.meta {
+    flex-direction: column;
     justify-content: space-between;
+}
+
+@media screen and (min-width: 87.5rem) {
+    footer section.meta {
+        flex-direction: row;
+    }
 }
 
 footer .meta ul {
@@ -892,7 +905,13 @@ footer ul li h3 {
 }
 
 footer section.meta>div {
-    margin-top: 0;
+    margin-top: 1rem;
+}
+
+@media screen and (min-width: 87.5rem) {
+    footer section.meta>div {
+        margin-top: 0;
+    }
 }
 
 .language-switch {
@@ -914,6 +933,7 @@ footer section.meta>div {
 
 select {
     font: inherit;
+    appearance: none;
 }
 
 a {
