@@ -7,10 +7,22 @@ body {
     background-color: #2f454f;
     color: #2f454f;
     margin: 0;
-    font-size: 1.125rem;
+    font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.66;
     position: relative;
+}
+
+@media screen and (min-width: 50rem) {
+    body {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 60rem) {
+    body {
+        font-size: 1.125rem;
+    }
 }
 
 .header {
@@ -71,25 +83,25 @@ body {
 
 .header-content .sign-in {
     position: absolute;
-    top: .75rem;
-    right: .75rem;
-    margin-top: .0625rem;
+    top: 0.75rem;
+    right: 0.75rem;
+    margin-top: 0.0625rem;
 }
 
 .header-content .sign-in, .create-blog {
     text-transform: uppercase;
     display: inline-block;
-    border-radius: .1875rem;
-    padding: .5rem 1rem;
-    font-size: .875rem;
+    border-radius: 0.1875rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 
 .create-blog {
-    padding: .875rem 1.25rem;
+    padding: 0.875rem 1.25rem;
     background: #ff8000;
     font-weight: 500;
-    font-size: .8125rem;
+    font-size: 0.8125rem;
 }
 
 .header-content .sign-in span {
@@ -97,13 +109,13 @@ body {
 }
 
 .header-content .create-blog {
-    padding: .625rem 1rem;
-    font-size: .875rem;
-    margin-right: .5rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
     visibility: hidden;
     background: #ff8000;
-    transition: .3s visibility cubic-bezier(0.645, 0.045, 0.355, 1),
-    .3s transform cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: 0.3s visibility cubic-bezier(0.645, 0.045, 0.355, 1),
+    0.3s transform cubic-bezier(0.645, 0.045, 0.355, 1);
     transform: translateY(-120%);
 }
 
@@ -133,7 +145,7 @@ body {
 }
 
 .header-underlay {
-    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1) transform;
+    transition: 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) transform;
     transform: translateY(-100%);
     position: absolute;
     top: 0;
@@ -182,7 +194,7 @@ body main, body header, body footer {
 
 .publish .publish-header p {
     font-size: 1.25rem;
-    margin-top: .75rem;
+    margin-top: 0.75rem;
     margin-bottom: 2.5rem;
 }
 
@@ -214,7 +226,7 @@ body main, body header, body footer {
 }
 
 .publish-background .theme {
-    transition: .8s opacity cubic-bezier(.645, .045, .355, 1) 1.2s;
+    transition: 0.8s opacity cubic-bezier(0.645, 0.045, 0.355, 1) 1.2s;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -230,7 +242,7 @@ body main, body header, body footer {
 
 .theme-layer {
     position: absolute;
-    transition: 1.4s cubic-bezier(.645, .045, .355, 1) transform;
+    transition: 1.4s cubic-bezier(0.645, 0.045, 0.355, 1) transform;
     transform: translateY(100vh);
 }
 
@@ -383,35 +395,35 @@ body main, body header, body footer {
 
 
 .theme-layer:nth-child(1) {
-    transition-delay: .25s;
+    transition-delay: 0.25s;
 }
 
 .theme-layer:nth-child(2) {
-    transition-delay: .3s;
+    transition-delay: 0.3s;
 }
 
 .theme-layer:nth-child(3) {
-    transition-delay: .35s;
+    transition-delay: 0.35s;
 }
 
 .theme-layer:nth-child(4) {
-    transition-delay: .4s;
+    transition-delay: 0.4s;
 }
 
 .theme-layer:nth-child(5) {
-    transition-delay: .45s;
+    transition-delay: 0.45s;
 }
 
 .theme-layer:nth-child(6) {
-    transition-delay: .5s;
+    transition-delay: 0.5s;
 }
 
 .theme-layer:nth-child(7) {
-    transition-delay: .55s;
+    transition-delay: 0.55s;
 }
 
 .theme-layer:nth-child(8) {
-    transition-delay: .6s;
+    transition-delay: 0.6s;
 }
 
 .scrolldown {
@@ -421,7 +433,7 @@ body main, body header, body footer {
     right: 4rem;
     width: 4rem;
     height: 4rem;
-    box-shadow: 0 .125rem .1875rem rgba(0, 0, 0, .2);
+    box-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.2);
     border-radius: 2rem;
     background: #ff8000;
     transform: translateY(50%);
@@ -430,10 +442,10 @@ body main, body header, body footer {
 .scrolldown .icon {
     width: 1.25rem;
     height: 1.25rem;
-    margin-top: .3125rem;
+    margin-top: 0.3125rem;
     color: #fff;
     fill: currentColor;
-    animation: bounceArrow 8s cubic-bezier(.785, .135, .15, .86) infinite;
+    animation: bounceArrow 8s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
 }
 
 @keyframes bounceArrow {
@@ -507,7 +519,7 @@ body main, body header, body footer {
 
 .section .background > * {
     transition-property: transform;
-    transition-timing-function: cubic-bezier(.645, .045, .355, 1);
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     position: absolute;
 }
 
@@ -535,8 +547,8 @@ body main, body header, body footer {
     max-width: 56.25rem;
     width: 59%;
     transform: translate3d(30%, 100%, 0);
-    transition-duration: .7s;
-    transition-delay: .2s;
+    transition-duration: 0.7s;
+    transition-delay: 0.2s;
 }
 
 .design2 {
@@ -545,8 +557,8 @@ body main, body header, body footer {
     max-width: 50rem;
     width: 55%;
     transform: translate3d(20%, 100%, 0);
-    transition-duration: .9s;
-    transition-delay: .1s;
+    transition-duration: 0.9s;
+    transition-delay: 0.1s;
 }
 
 .section.active:not(.publish) .background-layer {
@@ -580,8 +592,8 @@ body main, body header, body footer {
     top: 47%;
     bottom: -11%;
     transform: translateX(100%);
-    transition-duration: .7s;
-    transition-delay: .2s;
+    transition-duration: 0.7s;
+    transition-delay: 0.2s;
 }
 
 .lettergroup3 {
@@ -590,8 +602,8 @@ body main, body header, body footer {
     top: 29%;
     bottom: 15%;
     transform: translateX(100%);
-    transition-duration: .7s;
-    transition-delay: .3s;
+    transition-duration: 0.7s;
+    transition-delay: 0.3s;
 }
 
 .lettergroup4 {
@@ -600,8 +612,8 @@ body main, body header, body footer {
     top: 15%;
     display: block;
     transform: translateX(100%);
-    transition-duration: .7s;
-    transition-delay: .4s;
+    transition-duration: 0.7s;
+    transition-delay: 0.4s;
 }
 
 .earn-money .background {
@@ -617,7 +629,7 @@ body main, body header, body footer {
     max-width: 44%;
     position: relative;
     transform: translate3d(-10%, 0, 0);
-    transition-duration: .8s;
+    transition-duration: 0.8s;
 }
 
 .card {
@@ -625,8 +637,8 @@ body main, body header, body footer {
     width: 16.25rem;
     bottom: -9%;
     transform: translate3d(20%, 90%, 0);
-    transition-duration: .9s;
-    transition-delay: .1s;
+    transition-duration: 0.9s;
+    transition-delay: 0.1s;
 }
 
 .calculator {
@@ -635,12 +647,12 @@ body main, body header, body footer {
     width: 17.5rem;
     transform: translate3d(30%, 100%, 0);
     transition-duration: 1s;
-    transition-delay: .2s;
+    transition-delay: 0.2s;
 }
 
 .cent {
     transform: translate3d(70%, 85%, 0);
-    transition-duration: .8s;
+    transition-duration: 0.8s;
     right: 1%;
     bottom: 27%;
     width: 4.6875rem;
@@ -667,7 +679,7 @@ body main, body header, body footer {
     margin-top: 1%;
     margin-right: -13%;
     float: right;
-    transition-delay: .2s;
+    transition-delay: 0.2s;
 }
 
 .know-your-audience .background div .infomap {
@@ -678,9 +690,9 @@ body main, body header, body footer {
 }
 
 .know-your-audience .background .background-layer {
-    transition-timing-function: cubic-bezier(.645, .045, .355, 1);
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     transition-property: opacity;
-    transition-duration: .4s;
+    transition-duration: 0.4s;
     position: relative;
     float: right;
     opacity: 0;
@@ -695,15 +707,15 @@ body main, body header, body footer {
     margin-top: -5px;
     margin-right: -1%;
     width: 40%;
-    transition-delay: .4s;
+    transition-delay: 0.4s;
 }
 
 .chart {
     display: block;
     margin-right: -20%;
-    margin-top: -.4%;
+    margin-top: -0.4%;
     width: 35.5%;
-    transition-delay: .6s;
+    transition-delay: 0.6s;
 }
 
 .memories .background {
@@ -846,7 +858,7 @@ footer hr {
     margin-top: 3rem;
     margin-bottom: 3rem;
     border: 0 solid transparent;
-    border-bottom: .0625rem solid #2f454f;
+    border-bottom: 0.0625rem solid #2f454f;
 }
 
 footer section.meta {
@@ -881,11 +893,11 @@ footer .meta ul li {
 }
 
 footer .meta ul li:before {
-    transform: translateX(-1.375rem) translateY(.625rem);
+    transform: translateX(-1.375rem) translateY(0.625rem);
     display: block;
     position: absolute;
-    width: .125rem;
-    height: .625rem;
+    width: 0.125rem;
+    height: 0.625rem;
     background: #2f454f;
     content: '';
 }
@@ -923,9 +935,9 @@ footer section.meta > div {
     border: 0 solid transparent;
     width: 12.5rem;
     height: 2.25rem;
-    margin-top: -.1875rem;
+    margin-top: -0.1875rem;
     font-size: 15px;
-    padding: 0 2rem 0 .625rem;
+    padding: 0 2rem 0 0.625rem;
     border-radius: 4px;
     cursor: pointer;
 }
