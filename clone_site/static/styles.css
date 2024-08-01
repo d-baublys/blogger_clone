@@ -493,7 +493,7 @@ body main, body header, body footer {
     overflow: hidden;
 }
 
-.section header>div {
+.section header > div {
     width: 45%;
 }
 
@@ -505,7 +505,7 @@ body main, body header, body footer {
     height: 100%;
 }
 
-.section .background>* {
+.section .background > * {
     transition-property: transform;
     transition-timing-function: cubic-bezier(.645, .045, .355, 1);
     position: absolute;
@@ -653,7 +653,7 @@ body main, body header, body footer {
     justify-content: center;
 }
 
-.know-your-audience .background>div {
+.know-your-audience .background > div {
     transform: translateX(4em);
     width: 100%;
     display: block;
@@ -745,7 +745,7 @@ body main, body header, body footer {
     height: auto;
 }
 
-.millions__background>div {
+.millions__background > div {
     left: 0;
     width: 100%;
     height: 100%;
@@ -800,7 +800,7 @@ h1, h2, h3, h4 {
     background: #388d80;
 }
 
-.earn-money header>div {
+.earn-money header > div {
     margin-right: 10vw;
     float: right;
 }
@@ -903,12 +903,12 @@ footer ul li h3 {
     color: #fff;
 }
 
-footer section.meta>div {
+footer section.meta > div {
     margin-top: 1rem;
 }
 
 @media screen and (min-width: 87.5rem) {
-    footer section.meta>div {
+    footer section.meta > div {
         margin-top: 0;
     }
 }
