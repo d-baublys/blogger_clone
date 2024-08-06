@@ -39,7 +39,20 @@ let currentIndex = 0;
 function updateActiveTheme() {
     themes.forEach(theme => theme.classList.remove("active"));
     themes[currentIndex].classList.add("active");
+    setNextTimeout();
     currentIndex = (currentIndex + 1) % themes.length;
+}
+
+function getNextTimeout() {
+    if (currentIndex === 2) {
+        return 10000;
+    } else {
+        return 2300;
+    }
+}
+
+function setNextTimeout() {
+    setTimeout(updateActiveTheme, getNextTimeout());
 }
 
 function removeNoTransition() {
@@ -53,5 +66,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     updateActiveTheme();
 });
-
-setInterval(updateActiveTheme, 5000);
