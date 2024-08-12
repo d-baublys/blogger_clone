@@ -1705,12 +1705,27 @@ body main, body header, body footer {
     }
 }
 
-.millions-map {
-    background-image: url(millions-map_2x.png)
+@media screen and (max-width: 37.4375rem) {
+    .millions-background div.millions-map {
+        height: 15%;
+        background-color: #d16f1c;
+    }
+}
+
+@media screen and (min-width: 37.5rem) {
+    .millions-background div.millions-map {
+        background-image: url(millions-map_2x.png)
+    }
 }
 
 .millions-markers {
-    background-image: url(millions-markers_2x.png)
+    background-image: url(millions-markers_2x-mobile.png)
+}
+
+@media screen and (min-width: 37.5rem) {
+    .millions-markers {
+        background-image: url(millions-markers_2x.png)
+    }
 }
 
 .millions .millions-header {
@@ -1998,14 +2013,14 @@ img {
     border: 0;
 }
 
-.st0 {
-    fill: url(#gradientone);
+#tile-tint {
+    fill: url(#radialGradient11);
 }
 
-.st1 {
-    fill: #FFFFFF;
+#logo-d {
+    fill: #fff;
 }
 
-.st2 {
-    fill: url(#gradienttwo);
+#tile-main {
+    fill: url(#radialGradient8);
 }
