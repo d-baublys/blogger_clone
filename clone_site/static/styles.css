@@ -1714,17 +1714,17 @@ body main, body header, body footer {
 
 @media screen and (min-width: 37.5rem) {
     .millions-background div.millions-map {
-        background-image: url(img/millions-map_2x.png)
+        background-image: url(img/map.png)
     }
 }
 
 .millions-markers {
-    background-image: url(img/millions-markers_2x-mobile.png)
+    background-image: url(img/markers-mob.png)
 }
 
 @media screen and (min-width: 37.5rem) {
     .millions-markers {
-        background-image: url(img/millions-markers_2x.png)
+        background-image: url(img/markers.png)
     }
 }
 
@@ -1971,7 +1971,7 @@ footer section.meta > div {
 
 .language-switch {
     background-color: #303e47;
-    background-image: url(img/ui/icon-arrow-down.png);
+    background-image: url(img/ui/arrow-down.png);
     background-size: 12px;
     background-position: 95% 50%;
     background-repeat: no-repeat;
