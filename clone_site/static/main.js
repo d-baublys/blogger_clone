@@ -13,7 +13,7 @@ const sections = document.querySelectorAll(".section");
 
 const options = {
     root: null,
-    rootMargin: "0px",
+    rootMargin: "-50% 0px 0px 0px",
     threshold: 0.5
 };
 
