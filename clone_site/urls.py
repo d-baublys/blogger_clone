@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    path("", views.HomeView.as_view(), name="home")
-]
-
+app_name = "clone_site"
+urlpatterns = [path("", views.HomeView.as_view(), name="home")]
