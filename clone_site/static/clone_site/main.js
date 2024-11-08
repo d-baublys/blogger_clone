@@ -58,7 +58,7 @@ function removeNoTransition() {
 function initialiseThemes() {
     if (currentIndex === 0) {
         themesParent.classList.add("no-transition");
-        setTimeout(removeNoTransition, 0);
+        setTimeout(removeNoTransition, 10);
     }
     updateActiveTheme();
 }
