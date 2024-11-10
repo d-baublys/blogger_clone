@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["dbaublys.eu.pythonanywhere.com", "127.0.0.1"]
 
 
 # Application definition
@@ -147,3 +147,5 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+CSRF_TRUSTED_ORIGINS = ["https://dbaublys.eu.pythonanywhere.com"]
