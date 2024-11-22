@@ -13,8 +13,8 @@ Live Demo: https://dbaublys.eu.pythonanywhere.com
 ## Lessons
 - An opportunity to study a rich, highly interactive page
 - Using media queries to cater for different screen sizes
-- Implementing responsive ```img``` elements with the ```srcset``` attribute
-- Demonstrates the power of ```transition``` animations
+- Implementing responsive `img` elements with the `srcset` attribute
+- Demonstrates the power of `transition` animations
 - Exposure to animations with keyframes
 - Using semantic HTML elements
 - Understanding SVG
@@ -24,5 +24,5 @@ Live Demo: https://dbaublys.eu.pythonanywhere.com
 - Mindfulness about using potentially copyrighted assets
 - Ability to create, edit, and embed raster and vector graphics
 - Writing own JavaScript to achieve specific interactivity
-- Paying attention to the importance of the HTML ```head``` 
+- Paying attention to the importance of the HTML `head` 
 - Ability to deploy to production using a less-automated platform
