@@ -21,21 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = load_dotenv(os.path.join(BASE_DIR, ".env"))
 load_dotenv(env_path)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "django-insecure-@3ho_t&bn04!0xrg14t&qrh)1hl(^=y#bnz=h=k6^r7ussvdau"
-
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
     "django-insecure-@3ho_t&bn04!0xrg14t&qrh)1hl(^=y#bnz=h=k6^r7ussvdau",
 )
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ["dbaublys.eu.pythonanywhere.com", "127.0.0.1"]
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
@@ -148,4 +141,4 @@ STORAGES = {
     },
 }
 
-CSRF_TRUSTED_ORIGINS = ["https://dbaublys.eu.pythonanywhere.com"]
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(",")
